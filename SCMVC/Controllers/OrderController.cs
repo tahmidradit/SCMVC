@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using SCMVC.Models;
 using System;
 using System.Collections.Generic;
+using static Microsoft.AspNetCore.Razor.Language.TagHelperMetadata;
 using static NuGet.Packaging.PackagingConstants;
 using static System.Net.WebRequestMethods;
 
@@ -12,7 +13,7 @@ namespace SCMVC.Controllers
 {
     public class OrderController : Controller
     {
-        Uri baseAddress = new Uri("https://localhost:7084/api/Order");
+        Uri baseAddress = new Uri("https://localhost:7084/api/Order/");
          
         private readonly HttpClient httpClient;
 
@@ -50,33 +51,47 @@ namespace SCMVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Delete()
+         
+        public IActionResult Edit(int? id)
         {
-            return View();
+            Order order = new Order();
+            HttpResponseMessage httpResponseMessage = httpClient.GetAsync(baseAddress + id.ToString()).Result;
+            string data;
+            if (httpResponseMessage.IsSuccessStatusCode)
+            {
+                data = httpResponseMessage.Content.ReadAsStringAsync().Result;
+                order = JsonConvert.DeserializeObject<Order>(data);
+            }
+            
+            return View(order);
         }
 
-        //[HttpPost, ValidateAntiForgeryToken, ActionName("Delete")]
-        //public async Task<IActionResult> DeletePOST(int? id)
-        //{
-        //    var findById = await context.Categories.FindAsync(id);
-
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    if (findById == null)
-        //    {
-        //        return View();
-        //    }
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        context.Categories.Remove(findById);
-        //        await context.SaveChangesAsync();
-        //    }
-
-        //    return RedirectToAction(nameof(Index));
-        //}
+        [HttpPut, ActionName("Edit")]
+        public async Task<IActionResult> Edit()
+        {
+            Order order = new Order();
+        
+            await httpClient.PutAsJsonAsync(baseAddress, order);
+            
+            return RedirectToAction(nameof(Index));
+        }
+        public IActionResult Delete(int? id)
+        {
+            Order order = new Order();
+            HttpResponseMessage httpResponseMessage = httpClient.GetAsync(baseAddress + id.ToString()).Result;
+            string data;
+            if (httpResponseMessage.IsSuccessStatusCode)
+            {
+                data = httpResponseMessage.Content.ReadAsStringAsync().Result;
+                order = JsonConvert.DeserializeObject<Order>(data);
+            }
+            return View(order);
+        }
+         
+        [HttpDelete, ActionName("Delete")]
+        public IActionResult Delete(int id)
+        {
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

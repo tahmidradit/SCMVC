@@ -1,25 +1,14 @@
-﻿@model SCMVC.Models.Order
+﻿@model Order
 
 @{
     ViewData["Title"] = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Delete</h1>
-
-<h3>Are you sure you want to delete this?</h3>
+<h3>Are you sure you want to delete order of @Html.DisplayFor(x => x.ItemName) ?</h3>
 <div>
-    <h4>Order</h4>
-    <hr />
-    <dl class="row">
-          
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CustomerName)
-        </dt>
-    </dl>
-    
     <form asp-action="Delete">
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Yes" class="btn btn-danger" /> |
+        <a asp-action="Index" class="btn btn-dark text-white">No</a>
     </form>
 </div>
