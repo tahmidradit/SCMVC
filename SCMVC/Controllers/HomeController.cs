@@ -15,7 +15,6 @@ namespace SCMVC.Controllers
             
         }
 
-        [HttpGet]
         public IActionResult Index()
         {
             

@@ -50,12 +50,8 @@ namespace SCMVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete()
         {
-            //var findById = await context.Categories.FindAsync(id);
-            HttpResponseMessage httpResponseMessage = httpClient.GetAsync(baseAddress).Result;
-
-
             return View();
         }
 

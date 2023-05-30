@@ -4,7 +4,7 @@
     ViewData["Title"] = "Order";
 }
 
-<a class="btn btn-primary text-white" asp-controller="Order" asp-action="Create">Create</a>
+<a class="btn btn-primary text-white mb-1" asp-controller="Order" asp-action="Create">Create</a>
 
 <table class="table table-bordered text-center table-sm">
     <tr>
@@ -37,8 +37,8 @@
             <td>@items.OrderDateTime</td>
             <td>@items.ShippingDate</td>
             <td>
-                <a class="btn btn-info text-white btn-sm" asp-controller="Order" asp-action="Edit">Edit</a> |
-                <a class="btn btn-danger text-white btn-sm" asp-controller="Order" asp-action="Delete">Delete</a>
+                <a class="btn btn-info text-white btn-sm" asp-controller="Order" asp-route-id="@items.Id" asp-action="Edit">Edit</a> |
+                <a class="btn btn-danger text-white btn-sm" asp-controller="Order" asp-route-id="@items.Id" asp-action="Delete">Delete</a>
             </td>
         </tr>
     }
