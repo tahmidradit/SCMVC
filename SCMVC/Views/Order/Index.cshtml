@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Order>
+
+@{
+    ViewData["Title"] = "Order";
+}
+
+<a class="btn btn-primary text-white" asp-controller="Order" asp-action="Create">Create</a>
+
+<table class="table table-bordered text-center table-sm">
+    <tr>
+        <th>@Html.DisplayNameFor(x => x.CustomerName)</th>
+        <th>@Html.DisplayNameFor(x => x.CustomerAddress)</th>
+        <th>@Html.DisplayNameFor(x => x.ShippingAddress)</th>
+        <th>@Html.DisplayNameFor(x => x.ItemName)</th>
+        <th>@Html.DisplayNameFor(x => x.UnitPrice)</th>
+        <th>@Html.DisplayNameFor(x => x.Quantity)</th>
+        <th>@Html.DisplayNameFor(x => x.Discount)</th>
+        <th>@Html.DisplayNameFor(x => x.TotalPrice)</th>
+        <th>@Html.DisplayNameFor(x => x.OrderInvoiceNo)</th>
+        <th>@Html.DisplayNameFor(x => x.OrderDateTime)</th>
+        <th>@Html.DisplayNameFor(x => x.ShippingDate)</th>     
+        <th>Action</th>     
+    </tr>
+    
+    @foreach (var items in Model)
+    {
+        <tr>
+            <td>@items.CustomerName</td>
+            <td>@items.CustomerAddress</td>
+            <td>@items.ShippingAddress</td>
+            <td>@items.ItemName</td>
+            <td>@items.UnitPrice</td>
+            <td>@items.Quantity</td>
+            <td>@items.Discount</td>
+            <td>@items.TotalPrice</td>
+            <td>@items.OrderInvoiceNo</td>
+            <td>@items.OrderDateTime</td>
+            <td>@items.ShippingDate</td>
+            <td>
+                <a class="btn btn-info text-white btn-sm" asp-controller="Order" asp-action="Edit">Edit</a> |
+                <a class="btn btn-danger text-white btn-sm" asp-controller="Order" asp-action="Delete">Delete</a>
+            </td>
+        </tr>
+    }
+</table>
